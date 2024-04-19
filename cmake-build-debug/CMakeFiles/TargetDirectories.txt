@@ -1,0 +1,3 @@
+/home/kovoya_mint/STMproject/UART_callbacks/cmake-build-debug/CMakeFiles/UART_callbacks.elf.dir
+/home/kovoya_mint/STMproject/UART_callbacks/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/kovoya_mint/STMproject/UART_callbacks/cmake-build-debug/CMakeFiles/rebuild_cache.dir
