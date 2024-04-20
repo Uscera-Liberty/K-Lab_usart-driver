@@ -31,7 +31,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-void myCallback(UART_HandleTypeDef *huart);
+void  UART_ReceiveCallback(UART_HandleTypeDef *huart)
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -41,18 +41,15 @@ void myCallback(UART_HandleTypeDef *huart);
 
 /* Private variables ---------------------------------------------------------*/
 UART_HandleTypeDef huart2;
-DMA_HandleTypeDef hdma_usart2_rx;
+
 
 /* USER CODE BEGIN PV */
-#define TX_BUFFER_SIZE 10
+
 #define RX_BUFFER_SIZE 10
-
 static uint8_t rxBuffer[RX_BUFFER_SIZE];
-static uint8_t txBuffer[TX_BUFFER_SIZE];
-
-static uint8_t txBufferIdx = 0;
 static uint8_t rxBufferIdx = 0;
 uint8_t temp_rxBuffer[RX_BUFFER_SIZE];
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -105,7 +102,7 @@ int main(void)
     //__HAL_DMA_DISABLE_IT(&hdma_usart2_rx, DMA_IT_HT);
     __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
     __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
-    HAL_UART_RegisterCallback(&huart2,HAL_UART_RX_COMPLETE_CB_ID  , myCallback);
+    HAL_UART_RegisterCallback(&huart2,HAL_UART_RX_COMPLETE_CB_ID  , UART_ReceiveCallback);
     HAL_UART_Receive_IT(&huart2, rxBuffer, 1);
   /* USER CODE END 2 */
 
@@ -248,12 +245,14 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void  myCallback(UART_HandleTypeDef *huart)
+void  UART_ReceiveCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
         if (rxBufferIdx > RX_BUFFER_SIZE) {rxBufferIdx = 0;}
-        rxBuffer[rxBufferIdx] =  huart->Instance->RDR;rxBufferIdx+=1;
+        temp_rxBuffer = huart->Instance->RDR;
+        rxBuffer[rxBufferIdx] =  temp_rxBuffer;
+        rxBufferIdx+=1;
         HAL_UART_Receive_IT(&huart2, rxBuffer, 1);
     }
 }
