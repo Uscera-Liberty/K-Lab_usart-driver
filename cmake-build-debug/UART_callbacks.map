@@ -79,8 +79,6 @@ Discarded input sections
  .text          0x00000000        0x0 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
  .data          0x00000000        0x0 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
  .bss           0x00000000        0x0 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- .bss.temp_rxBuffer
-                0x00000000        0xa CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
  .text          0x00000000        0x0 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
  .data          0x00000000        0x0 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
  .bss           0x00000000        0x0 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
@@ -739,6 +737,10 @@ Discarded input sections
                 0x00000000       0x16 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.UART_DMARxOnlyAbortCallback
                 0x00000000       0x2a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+ .text.UART_TxISR_8BIT
+                0x00000000       0x5e CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+ .text.UART_TxISR_16BIT
+                0x00000000       0x62 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.HAL_UART_DeInit
                 0x00000000       0x5c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.HAL_UART_UnRegisterCallback
@@ -749,6 +751,8 @@ Discarded input sections
                 0x00000000       0x48 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.HAL_UART_UnRegisterRxEventCallback
                 0x00000000       0x3c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+ .text.HAL_UART_Transmit_IT
+                0x00000000       0x88 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.HAL_UART_Transmit_DMA
                 0x00000000       0xb4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.HAL_UART_DMAPause
@@ -1141,7 +1145,7 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
                 0x08000000                g_pfnVectors
                 0x080000c0                        . = ALIGN (0x4)
 
-.text           0x080000c0     0x1f10
+.text           0x080000c0     0x1dcc
                 0x080000c0                        . = ALIGN (0x4)
  *(.text)
  .text          0x080000c0      0x114 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
@@ -1162,328 +1166,321 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
                 0x0800024c       0x24 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
  .text.MX_DMA_Init
                 0x08000270       0x30 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+ .text.UART_ReceiveCallback
+                0x080002a0       0x54 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                0x080002a0                UART_ReceiveCallback
  .text.MX_GPIO_Init
-                0x080002a0       0x8c CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- .text.myCallback
-                0x0800032c       0x50 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
-                0x0800032c                myCallback
+                0x080002f4       0x8c CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
  .text.Error_Handler
-                0x0800037c        0x4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
-                0x0800037c                Error_Handler
+                0x08000380        0x4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                0x08000380                Error_Handler
  .text.MX_USART2_UART_Init
-                0x08000380       0x38 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                0x08000384       0x38 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
  .text.SystemClock_Config
-                0x080003b8       0x5c CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
-                0x080003b8                SystemClock_Config
- .text.main     0x08000414       0x60 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
-                0x08000414                main
+                0x080003bc       0x5c CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                0x080003bc                SystemClock_Config
+ .text.main     0x08000418       0x60 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                0x08000418                main
  .text.HAL_MspInit
-                0x08000474       0x30 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x08000474                HAL_MspInit
+                0x08000478       0x30 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x08000478                HAL_MspInit
  .text.HAL_UART_MspInit
-                0x080004a4       0xa4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
-                0x080004a4                HAL_UART_MspInit
+                0x080004a8       0xa4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+                0x080004a8                HAL_UART_MspInit
  .text.NMI_Handler
-                0x08000548        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08000548                NMI_Handler
- .text.HardFault_Handler
-                0x0800054a        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x0800054a                HardFault_Handler
- .text.SVC_Handler
                 0x0800054c        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x0800054c                SVC_Handler
- .text.PendSV_Handler
+                0x0800054c                NMI_Handler
+ .text.HardFault_Handler
                 0x0800054e        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x0800054e                PendSV_Handler
+                0x0800054e                HardFault_Handler
+ .text.SVC_Handler
+                0x08000550        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08000550                SVC_Handler
+ .text.PendSV_Handler
+                0x08000552        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08000552                PendSV_Handler
  .text.SysTick_Handler
-                0x08000550        0x8 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08000550                SysTick_Handler
+                0x08000554        0x8 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x08000554                SysTick_Handler
  .text.DMA1_Channel4_5_IRQHandler
-                0x08000558       0x10 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08000558                DMA1_Channel4_5_IRQHandler
+                0x0800055c       0x10 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x0800055c                DMA1_Channel4_5_IRQHandler
  .text.USART2_IRQHandler
-                0x08000568       0x10 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
-                0x08000568                USART2_IRQHandler
+                0x0800056c       0x10 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+                0x0800056c                USART2_IRQHandler
  .text.SystemInit
-                0x08000578        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
-                0x08000578                SystemInit
- *fill*         0x0800057a        0x2 
+                0x0800057c        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+                0x0800057c                SystemInit
+ *fill*         0x0800057e        0x2 
  .text.Reset_Handler
-                0x0800057c       0x50 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
-                0x0800057c                Reset_Handler
+                0x08000580       0x50 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
+                0x08000580                Reset_Handler
  .text.Default_Handler
-                0x080005cc        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
-                0x080005cc                TIM1_CC_IRQHandler
-                0x080005cc                TIM6_IRQHandler
-                0x080005cc                I2C1_IRQHandler
-                0x080005cc                SPI1_IRQHandler
-                0x080005cc                EXTI2_3_IRQHandler
-                0x080005cc                ADC1_IRQHandler
-                0x080005cc                I2C2_IRQHandler
-                0x080005cc                TIM17_IRQHandler
-                0x080005cc                RTC_IRQHandler
-                0x080005cc                TIM16_IRQHandler
-                0x080005cc                TIM3_IRQHandler
-                0x080005cc                EXTI4_15_IRQHandler
-                0x080005cc                RCC_IRQHandler
-                0x080005cc                DMA1_Channel1_IRQHandler
-                0x080005cc                Default_Handler
-                0x080005cc                TIM14_IRQHandler
-                0x080005cc                TIM15_IRQHandler
-                0x080005cc                EXTI0_1_IRQHandler
-                0x080005cc                SPI2_IRQHandler
-                0x080005cc                WWDG_IRQHandler
-                0x080005cc                DMA1_Channel2_3_IRQHandler
-                0x080005cc                FLASH_IRQHandler
-                0x080005cc                USART1_IRQHandler
-                0x080005cc                TIM1_BRK_UP_TRG_COM_IRQHandler
- *fill*         0x080005ce        0x2 
+                0x080005d0        0x2 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
+                0x080005d0                TIM1_CC_IRQHandler
+                0x080005d0                TIM6_IRQHandler
+                0x080005d0                I2C1_IRQHandler
+                0x080005d0                SPI1_IRQHandler
+                0x080005d0                EXTI2_3_IRQHandler
+                0x080005d0                ADC1_IRQHandler
+                0x080005d0                I2C2_IRQHandler
+                0x080005d0                TIM17_IRQHandler
+                0x080005d0                RTC_IRQHandler
+                0x080005d0                TIM16_IRQHandler
+                0x080005d0                TIM3_IRQHandler
+                0x080005d0                EXTI4_15_IRQHandler
+                0x080005d0                RCC_IRQHandler
+                0x080005d0                DMA1_Channel1_IRQHandler
+                0x080005d0                Default_Handler
+                0x080005d0                TIM14_IRQHandler
+                0x080005d0                TIM15_IRQHandler
+                0x080005d0                EXTI0_1_IRQHandler
+                0x080005d0                SPI2_IRQHandler
+                0x080005d0                WWDG_IRQHandler
+                0x080005d0                DMA1_Channel2_3_IRQHandler
+                0x080005d0                FLASH_IRQHandler
+                0x080005d0                USART1_IRQHandler
+                0x080005d0                TIM1_BRK_UP_TRG_COM_IRQHandler
+ *fill*         0x080005d2        0x2 
  .text.HAL_InitTick
-                0x080005d0       0x50 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x080005d0                HAL_InitTick
+                0x080005d4       0x50 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x080005d4                HAL_InitTick
  .text.HAL_Init
-                0x08000620       0x20 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x08000620                HAL_Init
+                0x08000624       0x20 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x08000624                HAL_Init
  .text.HAL_IncTick
-                0x08000640       0x18 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x08000640                HAL_IncTick
+                0x08000644       0x18 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x08000644                HAL_IncTick
  .text.HAL_GetTick
-                0x08000658        0xc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
-                0x08000658                HAL_GetTick
+                0x0800065c        0xc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+                0x0800065c                HAL_GetTick
  .text.__NVIC_SetPriority
-                0x08000664       0x60 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x08000668       0x60 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
  .text.SysTick_Config
-                0x080006c4       0x38 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x080006c8       0x38 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
  .text.HAL_NVIC_SetPriority
-                0x080006fc        0x8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
-                0x080006fc                HAL_NVIC_SetPriority
+                0x08000700        0x8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x08000700                HAL_NVIC_SetPriority
  .text.HAL_NVIC_EnableIRQ
-                0x08000704       0x18 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
-                0x08000704                HAL_NVIC_EnableIRQ
+                0x08000708       0x18 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x08000708                HAL_NVIC_EnableIRQ
  .text.HAL_SYSTICK_Config
-                0x0800071c        0x8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
-                0x0800071c                HAL_SYSTICK_Config
+                0x08000720        0x8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+                0x08000720                HAL_SYSTICK_Config
  .text.DMA_CalcBaseAndBitshift
-                0x08000724       0x24 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+                0x08000728       0x24 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
  .text.HAL_DMA_Init
-                0x08000748       0x50 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
-                0x08000748                HAL_DMA_Init
+                0x0800074c       0x50 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+                0x0800074c                HAL_DMA_Init
  .text.HAL_DMA_Abort
-                0x08000798       0x44 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
-                0x08000798                HAL_DMA_Abort
+                0x0800079c       0x44 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+                0x0800079c                HAL_DMA_Abort
  .text.HAL_DMA_Abort_IT
-                0x080007dc       0x4a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
-                0x080007dc                HAL_DMA_Abort_IT
+                0x080007e0       0x4a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+                0x080007e0                HAL_DMA_Abort_IT
  .text.HAL_DMA_IRQHandler
-                0x08000826       0xaa CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
-                0x08000826                HAL_DMA_IRQHandler
+                0x0800082a       0xaa CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+                0x0800082a                HAL_DMA_IRQHandler
  .text.HAL_GPIO_Init
-                0x080008d0      0x188 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
-                0x080008d0                HAL_GPIO_Init
+                0x080008d4      0x188 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+                0x080008d4                HAL_GPIO_Init
  .text.HAL_GPIO_WritePin
-                0x08000a58        0xc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
-                0x08000a58                HAL_GPIO_WritePin
+                0x08000a5c        0xc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+                0x08000a5c                HAL_GPIO_WritePin
  .text.HAL_RCC_OscConfig
-                0x08000a64      0x49c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x08000a64                HAL_RCC_OscConfig
+                0x08000a68      0x49c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08000a68                HAL_RCC_OscConfig
  .text.HAL_RCC_GetSysClockFreq
-                0x08000f00       0x54 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x08000f00                HAL_RCC_GetSysClockFreq
+                0x08000f04       0x54 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08000f04                HAL_RCC_GetSysClockFreq
  .text.HAL_RCC_ClockConfig
-                0x08000f54      0x134 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x08000f54                HAL_RCC_ClockConfig
+                0x08000f58      0x134 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08000f58                HAL_RCC_ClockConfig
  .text.HAL_RCC_GetHCLKFreq
-                0x08001088        0xc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x08001088                HAL_RCC_GetHCLKFreq
+                0x0800108c        0xc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x0800108c                HAL_RCC_GetHCLKFreq
  .text.HAL_RCC_GetPCLK1Freq
-                0x08001094       0x20 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
-                0x08001094                HAL_RCC_GetPCLK1Freq
+                0x08001098       0x20 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08001098                HAL_RCC_GetPCLK1Freq
  .text.HAL_UART_TxCpltCallback
-                0x080010b4        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010b4                HAL_UART_TxCpltCallback
- .text.HAL_UART_TxHalfCpltCallback
-                0x080010b6        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010b6                HAL_UART_TxHalfCpltCallback
- .text.HAL_UART_RxCpltCallback
                 0x080010b8        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010b8                HAL_UART_RxCpltCallback
- .text.HAL_UART_RxHalfCpltCallback
+                0x080010b8                HAL_UART_TxCpltCallback
+ .text.HAL_UART_TxHalfCpltCallback
                 0x080010ba        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010ba                HAL_UART_RxHalfCpltCallback
- .text.HAL_UART_ErrorCallback
+                0x080010ba                HAL_UART_TxHalfCpltCallback
+ .text.HAL_UART_RxCpltCallback
                 0x080010bc        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010bc                HAL_UART_ErrorCallback
- .text.HAL_UART_AbortCpltCallback
+                0x080010bc                HAL_UART_RxCpltCallback
+ .text.HAL_UART_RxHalfCpltCallback
                 0x080010be        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010be                HAL_UART_AbortCpltCallback
- .text.HAL_UART_AbortTransmitCpltCallback
+                0x080010be                HAL_UART_RxHalfCpltCallback
+ .text.HAL_UART_ErrorCallback
                 0x080010c0        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010c0                HAL_UART_AbortTransmitCpltCallback
- .text.HAL_UART_AbortReceiveCpltCallback
+                0x080010c0                HAL_UART_ErrorCallback
+ .text.HAL_UART_AbortCpltCallback
                 0x080010c2        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010c2                HAL_UART_AbortReceiveCpltCallback
- .text.HAL_UARTEx_RxEventCallback
+                0x080010c2                HAL_UART_AbortCpltCallback
+ .text.HAL_UART_AbortTransmitCpltCallback
                 0x080010c4        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080010c4                HAL_UARTEx_RxEventCallback
- *fill*         0x080010c6        0x2 
+                0x080010c4                HAL_UART_AbortTransmitCpltCallback
+ .text.HAL_UART_AbortReceiveCpltCallback
+                0x080010c6        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x080010c6                HAL_UART_AbortReceiveCpltCallback
+ .text.HAL_UARTEx_RxEventCallback
+                0x080010c8        0x2 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x080010c8                HAL_UARTEx_RxEventCallback
+ *fill*         0x080010ca        0x2 
  .text.UART_EndRxTransfer
-                0x080010c8       0x60 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x080010cc       0x60 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.UART_DMAAbortOnError
-                0x08001128       0x16 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .text.UART_TxISR_8BIT
-                0x0800113e       0x5e CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .text.UART_TxISR_16BIT
-                0x0800119c       0x62 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x0800112c       0x16 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.UART_EndTransmit_IT
-                0x080011fe       0x2a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x08001142       0x2a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.UART_RxISR_8BIT
-                0x08001228       0xe0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x0800116c       0xe0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.UART_RxISR_16BIT
-                0x08001308       0xdc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x0800124c       0xdc CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
  .text.HAL_UART_RegisterCallback
-                0x080013e4       0xc4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080013e4                HAL_UART_RegisterCallback
- .text.HAL_UART_Transmit_IT
-                0x080014a8       0x88 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080014a8                HAL_UART_Transmit_IT
+                0x08001328       0xc4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x08001328                HAL_UART_RegisterCallback
  .text.HAL_UART_IRQHandler
-                0x08001530      0x2c4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001530                HAL_UART_IRQHandler
+                0x080013ec      0x2c4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x080013ec                HAL_UART_IRQHandler
  .text.UART_InitCallbacksToDefault
-                0x080017f4       0x5c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080017f4                UART_InitCallbacksToDefault
+                0x080016b0       0x5c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x080016b0                UART_InitCallbacksToDefault
  .text.UART_SetConfig
-                0x08001850      0x170 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001850                UART_SetConfig
+                0x0800170c      0x170 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x0800170c                UART_SetConfig
  .text.UART_AdvFeatureConfig
-                0x080019c0       0xe0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x080019c0                UART_AdvFeatureConfig
+                0x0800187c       0xe0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x0800187c                UART_AdvFeatureConfig
  .text.UART_WaitOnFlagUntilTimeout
-                0x08001aa0       0x96 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001aa0                UART_WaitOnFlagUntilTimeout
- *fill*         0x08001b36        0x2 
+                0x0800195c       0x96 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x0800195c                UART_WaitOnFlagUntilTimeout
+ *fill*         0x080019f2        0x2 
  .text.UART_CheckIdleState
-                0x08001b38       0xd0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001b38                UART_CheckIdleState
+                0x080019f4       0xd0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x080019f4                UART_CheckIdleState
  .text.HAL_UART_Init
-                0x08001c08       0x88 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001c08                HAL_UART_Init
+                0x08001ac4       0x88 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x08001ac4                HAL_UART_Init
  .text.UART_Start_Receive_IT
-                0x08001c90       0xd4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001c90                UART_Start_Receive_IT
+                0x08001b4c       0xd4 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x08001b4c                UART_Start_Receive_IT
  .text.HAL_UART_Receive_IT
-                0x08001d64       0x62 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x08001d64                HAL_UART_Receive_IT
- *fill*         0x08001dc6        0x2 
+                0x08001c20       0x62 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x08001c20                HAL_UART_Receive_IT
+ *fill*         0x08001c82        0x2 
  .text.startup.register_fini
-                0x08001dc8       0x18 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__call_atexit.o)
- .text.memset   0x08001de0       0xa8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-memset.o)
-                0x08001de0                memset
+                0x08001c84       0x18 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__call_atexit.o)
+ .text.memset   0x08001c9c       0xa8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-memset.o)
+                0x08001c9c                memset
  .text.__libc_init_array
-                0x08001e88       0x48 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-init.o)
-                0x08001e88                __libc_init_array
+                0x08001d44       0x48 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-init.o)
+                0x08001d44                __libc_init_array
  .text.__libc_fini_array
-                0x08001ed0       0x28 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-fini.o)
-                0x08001ed0                __libc_fini_array
+                0x08001d8c       0x28 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-fini.o)
+                0x08001d8c                __libc_fini_array
  .text.__retarget_lock_acquire_recursive
-                0x08001ef8        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-lock.o)
-                0x08001ef8                __retarget_lock_acquire_recursive
+                0x08001db4        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-lock.o)
+                0x08001db4                __retarget_lock_acquire_recursive
  .text.__retarget_lock_release_recursive
-                0x08001efc        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-lock.o)
-                0x08001efc                __retarget_lock_release_recursive
- .text.atexit   0x08001f00       0x10 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-atexit.o)
-                0x08001f00                atexit
+                0x08001db8        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-lock.o)
+                0x08001db8                __retarget_lock_release_recursive
+ .text.atexit   0x08001dbc       0x10 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-atexit.o)
+                0x08001dbc                atexit
  .text.__register_exitproc
-                0x08001f10       0xa8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__atexit.o)
-                0x08001f10                __register_exitproc
+                0x08001dcc       0xa8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__atexit.o)
+                0x08001dcc                __register_exitproc
  *(.glue_7)
- .glue_7        0x08001fb8        0x0 linker stubs
+ .glue_7        0x08001e74        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08001fb8        0x0 linker stubs
+ .glue_7t       0x08001e74        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x08001fb8        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
+ .eh_frame      0x08001e74        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
  *(.init)
- .init          0x08001fb8        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crti.o
-                0x08001fb8                _init
- .init          0x08001fbc        0x8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtn.o
+ .init          0x08001e74        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crti.o
+                0x08001e74                _init
+ .init          0x08001e78        0x8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtn.o
  *(.fini)
- .fini          0x08001fc4        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crti.o
-                0x08001fc4                _fini
- .fini          0x08001fc8        0x8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtn.o
-                0x08001fd0                        . = ALIGN (0x4)
-                0x08001fd0                        _etext = .
+ .fini          0x08001e80        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crti.o
+                0x08001e80                _fini
+ .fini          0x08001e84        0x8 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtn.o
+                0x08001e8c                        . = ALIGN (0x4)
+                0x08001e8c                        _etext = .
 
-.vfp11_veneer   0x08001fd0        0x0
- .vfp11_veneer  0x08001fd0        0x0 linker stubs
+.vfp11_veneer   0x08001e8c        0x0
+ .vfp11_veneer  0x08001e8c        0x0 linker stubs
 
-.v4_bx          0x08001fd0        0x0
- .v4_bx         0x08001fd0        0x0 linker stubs
+.v4_bx          0x08001e8c        0x0
+ .v4_bx         0x08001e8c        0x0 linker stubs
 
-.iplt           0x08001fd0        0x0
- .iplt          0x08001fd0        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
+.iplt           0x08001e8c        0x0
+ .iplt          0x08001e8c        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
 
-.rodata         0x08001fd0       0x6c
-                0x08001fd0                        . = ALIGN (0x4)
+.rodata         0x08001e8c       0x6c
+                0x08001e8c                        . = ALIGN (0x4)
  *(.rodata)
  *(.rodata*)
  .rodata.APBPrescTable
-                0x08001fd0        0x8 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
-                0x08001fd0                APBPrescTable
+                0x08001e8c        0x8 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+                0x08001e8c                APBPrescTable
  .rodata.AHBPrescTable
-                0x08001fd8       0x10 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
-                0x08001fd8                AHBPrescTable
+                0x08001e94       0x10 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+                0x08001e94                AHBPrescTable
  .rodata.aPredivFactorTable.0
-                0x08001fe8       0x10 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08001ea4       0x10 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
  .rodata.aPLLMULFactorTable.1
-                0x08001ff8       0x10 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+                0x08001eb4       0x10 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
  .rodata.HAL_UART_RegisterCallback
-                0x08002008       0x34 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
-                0x0800203c                        . = ALIGN (0x4)
+                0x08001ec4       0x34 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+                0x08001ef8                        . = ALIGN (0x4)
 
-.rel.dyn        0x0800203c        0x0
- .rel.iplt      0x0800203c        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
+.rel.dyn        0x08001ef8        0x0
+ .rel.iplt      0x08001ef8        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
 
-.ARM.extab      0x0800203c        0x0
-                0x0800203c                        . = ALIGN (0x4)
+.ARM.extab      0x08001ef8        0x0
+                0x08001ef8                        . = ALIGN (0x4)
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x0800203c                        . = ALIGN (0x4)
+                0x08001ef8                        . = ALIGN (0x4)
 
-.ARM            0x0800203c        0x0
-                0x0800203c                        . = ALIGN (0x4)
-                0x0800203c                        __exidx_start = .
+.ARM            0x08001ef8        0x0
+                0x08001ef8                        . = ALIGN (0x4)
+                0x08001ef8                        __exidx_start = .
  *(.ARM.exidx*)
-                0x0800203c                        __exidx_end = .
-                0x0800203c                        . = ALIGN (0x4)
+                0x08001ef8                        __exidx_end = .
+                0x08001ef8                        . = ALIGN (0x4)
 
-.preinit_array  0x0800203c        0x0
-                0x0800203c                        . = ALIGN (0x4)
-                0x0800203c                        PROVIDE (__preinit_array_start = .)
+.preinit_array  0x08001ef8        0x0
+                0x08001ef8                        . = ALIGN (0x4)
+                0x08001ef8                        PROVIDE (__preinit_array_start = .)
  *(.preinit_array*)
-                0x0800203c                        PROVIDE (__preinit_array_end = .)
-                0x0800203c                        . = ALIGN (0x4)
+                0x08001ef8                        PROVIDE (__preinit_array_end = .)
+                0x08001ef8                        . = ALIGN (0x4)
 
-.init_array     0x0800203c        0x8
-                0x0800203c                        . = ALIGN (0x4)
-                0x0800203c                        PROVIDE (__init_array_start = .)
+.init_array     0x08001ef8        0x8
+                0x08001ef8                        . = ALIGN (0x4)
+                0x08001ef8                        PROVIDE (__init_array_start = .)
  *(SORT_BY_NAME(.init_array.*))
  .init_array.00000
-                0x0800203c        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__call_atexit.o)
+                0x08001ef8        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__call_atexit.o)
  *(.init_array*)
- .init_array    0x08002040        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
-                0x08002044                        PROVIDE (__init_array_end = .)
-                0x08002044                        . = ALIGN (0x4)
+ .init_array    0x08001efc        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
+                0x08001f00                        PROVIDE (__init_array_end = .)
+                0x08001f00                        . = ALIGN (0x4)
 
-.fini_array     0x08002044        0x4
-                0x08002044                        . = ALIGN (0x4)
-                0x08002044                        PROVIDE (__fini_array_start = .)
+.fini_array     0x08001f00        0x4
+                0x08001f00                        . = ALIGN (0x4)
+                0x08001f00                        PROVIDE (__fini_array_start = .)
  *(SORT_BY_NAME(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x08002044        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
-                0x08002048                        PROVIDE (__fini_array_end = .)
-                0x08002048                        . = ALIGN (0x4)
-                0x08002048                        _sidata = LOADADDR (.data)
+ .fini_array    0x08001f00        0x4 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
+                0x08001f04                        PROVIDE (__fini_array_end = .)
+                0x08001f04                        . = ALIGN (0x4)
+                0x08001f04                        _sidata = LOADADDR (.data)
 
-.data           0x20000000       0x10 load address 0x08002048
+.data           0x20000000       0x10 load address 0x08001f04
                 0x20000000                        . = ALIGN (0x4)
                 0x20000000                        _sdata = .
  *(.data)
@@ -1507,17 +1504,17 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
                 0x20000010                        _edata = .
 
 .tm_clone_table
-                0x20000010        0x0 load address 0x08002058
+                0x20000010        0x0 load address 0x08001f14
  .tm_clone_table
                 0x20000010        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
  .tm_clone_table
                 0x20000010        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtend.o
 
-.igot.plt       0x20000010        0x0 load address 0x08002058
+.igot.plt       0x20000010        0x0 load address 0x08001f14
  .igot.plt      0x20000010        0x0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
                 0x20000010                        . = ALIGN (0x4)
 
-.bss            0x20000010      0x2c0 load address 0x08002058
+.bss            0x20000010      0x2c0 load address 0x08001f14
                 0x20000010                        _sbss = .
                 0x20000010                        __bss_start__ = _sbss
  *(.bss)
@@ -1526,9 +1523,13 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
                 0x20000010        0x1 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
  *fill*         0x20000011        0x3 
  .bss.object.0  0x20000014       0x18 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/crtbegin.o
- .bss.rxBufferIdx
+ .bss.temp_rxBuffer
                 0x2000002c        0x1 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- *fill*         0x2000002d        0x3 
+                0x2000002c                temp_rxBuffer
+ .bss.rxBufferIdx
+                0x2000002d        0x1 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                0x2000002d                rxBufferIdx
+ *fill*         0x2000002e        0x2 
  .bss.rxBuffer  0x20000030        0xa CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
  *fill*         0x2000003a        0x2 
  .bss.hdma_usart2_rx
@@ -1553,7 +1554,7 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
                 0x200002d0                        __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x200002d0      0x600 load address 0x08002058
+                0x200002d0      0x600 load address 0x08001f14
                 0x200002d0                        . = ALIGN (0x8)
                 [!provide]                        PROVIDE (end = .)
                 0x200002d0                        PROVIDE (_end = .)
@@ -1625,31 +1626,31 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
 LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libm.a
 LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/libgcc.a
 
-.debug_info     0x00000000     0x9ee8
- .debug_info    0x00000000     0x109f CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- .debug_info    0x0000109f      0xbf3 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_info    0x00001c92      0x7b5 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_info    0x00002447      0x264 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_info    0x000026ab       0x30 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
- .debug_info    0x000026db      0x713 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_info    0x00002dee      0x7db CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_info    0x000035c9      0x85a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
- .debug_info    0x00003e23      0x5fb CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_info    0x0000441e      0xa3a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_info    0x00004e58     0x5090 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+.debug_info     0x00000000     0x9e9b
+ .debug_info    0x00000000     0x1052 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+ .debug_info    0x00001052      0xbf3 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_info    0x00001c45      0x7b5 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_info    0x000023fa      0x264 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_info    0x0000265e       0x30 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
+ .debug_info    0x0000268e      0x713 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_info    0x00002da1      0x7db CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_info    0x0000357c      0x85a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+ .debug_info    0x00003dd6      0x5fb CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_info    0x000043d1      0xa3a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_info    0x00004e0b     0x5090 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
 
-.debug_abbrev   0x00000000     0x170d
- .debug_abbrev  0x00000000      0x2c9 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- .debug_abbrev  0x000002c9      0x226 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_abbrev  0x000004ef      0x18f CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_abbrev  0x0000067e      0x136 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_abbrev  0x000007b4       0x24 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
- .debug_abbrev  0x000007d8      0x269 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_abbrev  0x00000a41      0x2ec CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_abbrev  0x00000d2d      0x1f6 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
- .debug_abbrev  0x00000f23      0x1f6 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_abbrev  0x00001119      0x29c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_abbrev  0x000013b5      0x358 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+.debug_abbrev   0x00000000     0x16ed
+ .debug_abbrev  0x00000000      0x2a9 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+ .debug_abbrev  0x000002a9      0x226 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_abbrev  0x000004cf      0x18f CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_abbrev  0x0000065e      0x136 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_abbrev  0x00000794       0x24 CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
+ .debug_abbrev  0x000007b8      0x269 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_abbrev  0x00000a21      0x2ec CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_abbrev  0x00000d0d      0x1f6 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+ .debug_abbrev  0x00000f03      0x1f6 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_abbrev  0x000010f9      0x29c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_abbrev  0x00001395      0x358 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
 
 .debug_loclists
                 0x00000000     0x3a15
@@ -1721,32 +1722,32 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
  .debug_rnglists
                 0x000002e2      0x1f6 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
 
-.debug_line     0x00000000     0x7e74
- .debug_line    0x00000000      0x55e CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- .debug_line    0x0000055e      0x3ef CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_line    0x0000094d      0x30f CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_line    0x00000c5c      0x2a4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_line    0x00000f00       0x7b CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
- .debug_line    0x00000f7b      0x5f9 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_line    0x00001574      0x5dd CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_line    0x00001b51      0xafa CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
- .debug_line    0x0000264b      0x754 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_line    0x00002d9f      0xcd8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_line    0x00003a77     0x43fd CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+.debug_line     0x00000000     0x7e75
+ .debug_line    0x00000000      0x55f CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+ .debug_line    0x0000055f      0x3ef CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_line    0x0000094e      0x30f CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_line    0x00000c5d      0x2a4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_line    0x00000f01       0x7b CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
+ .debug_line    0x00000f7c      0x5f9 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_line    0x00001575      0x5dd CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_line    0x00001b52      0xafa CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+ .debug_line    0x0000264c      0x754 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_line    0x00002da0      0xcd8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_line    0x00003a78     0x43fd CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
 
-.debug_str      0x00000000     0x21ea
- .debug_str     0x00000000     0x21ea CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
-                                0xdb8 (size before relaxing)
- .debug_str     0x000021ea      0xa52 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_str     0x000021ea      0x7a3 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_str     0x000021ea      0x2c4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_str     0x000021ea       0xab CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
- .debug_str     0x000021ea      0x6fa CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_str     0x000021ea      0x63b CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_str     0x000021ea      0x66a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
- .debug_str     0x000021ea      0x447 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_str     0x000021ea      0x6a8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_str     0x000021ea     0x11e8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+.debug_str      0x00000000     0x21df
+ .debug_str     0x00000000     0x21df CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+                                0xd98 (size before relaxing)
+ .debug_str     0x000021df      0xa52 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_str     0x000021df      0x7a3 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_str     0x000021df      0x2c4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_str     0x000021df       0xab CMakeFiles/UART_callbacks.elf.dir/Core/Startup/startup_stm32f030r8tx.s.obj
+ .debug_str     0x000021df      0x6fa CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_str     0x000021df      0x63b CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_str     0x000021df      0x66a CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+ .debug_str     0x000021df      0x447 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_str     0x000021df      0x6a8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_str     0x000021df     0x11e8 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
 
 .comment        0x00000000       0x44
  .comment       0x00000000       0x44 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
@@ -1761,25 +1762,25 @@ LOAD /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none
  .comment       0x00000044       0x45 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
  .comment       0x00000044       0x45 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
 
-.debug_frame    0x00000000     0x1084
- .debug_frame   0x00000000       0xb8 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
- .debug_frame   0x000000b8       0x58 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
- .debug_frame   0x00000110       0x98 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
- .debug_frame   0x000001a8       0x38 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
- .debug_frame   0x000001e0      0x1ac CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
- .debug_frame   0x0000038c      0x144 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
- .debug_frame   0x000004d0      0x168 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
- .debug_frame   0x00000638       0xc0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
- .debug_frame   0x000006f8      0x134 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
- .debug_frame   0x0000082c      0x64c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
- .debug_frame   0x00000e78       0x20 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
- .debug_frame   0x00000e98       0x54 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__call_atexit.o)
- .debug_frame   0x00000eec       0x30 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-memset.o)
- .debug_frame   0x00000f1c       0x2c /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-init.o)
- .debug_frame   0x00000f48       0x2c /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-fini.o)
- .debug_frame   0x00000f74       0xb0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-lock.o)
- .debug_frame   0x00001024       0x28 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-atexit.o)
- .debug_frame   0x0000104c       0x38 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__atexit.o)
+.debug_frame    0x00000000     0x1080
+ .debug_frame   0x00000000       0xb4 CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj
+ .debug_frame   0x000000b4       0x58 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj
+ .debug_frame   0x0000010c       0x98 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_it.c.obj
+ .debug_frame   0x000001a4       0x38 CMakeFiles/UART_callbacks.elf.dir/Core/Src/system_stm32f0xx.c.obj
+ .debug_frame   0x000001dc      0x1ac CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c.obj
+ .debug_frame   0x00000388      0x144 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c.obj
+ .debug_frame   0x000004cc      0x168 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c.obj
+ .debug_frame   0x00000634       0xc0 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c.obj
+ .debug_frame   0x000006f4      0x134 CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c.obj
+ .debug_frame   0x00000828      0x64c CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c.obj
+ .debug_frame   0x00000e74       0x20 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/thumb/v6-m/nofp/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000e94       0x54 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__call_atexit.o)
+ .debug_frame   0x00000ee8       0x30 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-memset.o)
+ .debug_frame   0x00000f18       0x2c /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-init.o)
+ .debug_frame   0x00000f44       0x2c /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-fini.o)
+ .debug_frame   0x00000f70       0xb0 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-lock.o)
+ .debug_frame   0x00001020       0x28 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-atexit.o)
+ .debug_frame   0x00001048       0x38 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.2.1/../../../../arm-none-eabi/lib/thumb/v6-m/nofp/libg.a(libc_a-__atexit.o)
 
 .debug_line_str
                 0x00000000      0x151
