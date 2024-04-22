@@ -18,10 +18,12 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "FIFO.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include "FIFO.c"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -31,7 +33,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-void  UART_ReceiveCallback(UART_HandleTypeDef *huart);
+void  myCallback(UART_HandleTypeDef *huart);
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -45,7 +47,9 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 fifo_t myfifo;
-uint8_t temp_rxBuffer;
+uint8_t temp_rxBuffer[1];
+uint8_t i = 0;
+uint8_t buffer[4];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -78,9 +82,9 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+    //HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
+    //HAL_NVIC_EnableIRQ(USART2_IRQn);
     myfifo = fifo_create(10,sizeof(uint8_t));
-    HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
-    HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -95,12 +99,8 @@ int main(void)
   MX_DMA_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-    //HAL_UARTEx_ReceiveToIdle_DMA(&huart2, temp_rxBuffer, RX_BUFFER_SIZE);
-    //__HAL_DMA_DISABLE_IT(&hdma_usart2_rx, DMA_IT_HT);
-    __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
-    __HAL_UART_ENABLE_IT(&huart2, UART_IT_IDLE);
-    HAL_UART_RegisterCallback(&huart2,HAL_UART_RX_COMPLETE_CB_ID  , UART_ReceiveCallback);
-    HAL_UART_Receive_IT(&huart2, (uint8_t *) temp_rxBuffer, 1);
+    HAL_UART_RegisterCallback(&huart2,HAL_UART_RX_COMPLETE_CB_ID  , myCallback);
+    HAL_UART_Receive_IT(&huart2, temp_rxBuffer, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -108,6 +108,15 @@ int main(void)
     //HAL_UARTEx_ReceiveToIdle_DMA(&huart2, (uint8_t *) rx_buffer, sizeof(rx_buffer));
   while (1)
   {
+#if 0
+    while (!fifo_is_empty(myfifo)) {
+              uint8_t c;
+              fifo_get(myfifo, &c);
+              buffer[i] = c;
+              i+=1;
+          }
+    HAL_UART_Transmit(&huart2, buffer,i,100);
+#endif
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -242,13 +251,12 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-void UART_ReceiveCallback(UART_HandleTypeDef *huart)
+void myCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
-        temp_rxBuffer = huart->Instance->RDR;
-        fifo_add(myfifo, (const void *) temp_rxBuffer);
-        HAL_UART_Receive_IT(&huart2, (uint8_t *) temp_rxBuffer, 1);
+        fifo_add(myfifo, &temp_rxBuffer[0]);
+        HAL_UART_Receive_IT(&huart2, temp_rxBuffer, 1);
     }
 }
 

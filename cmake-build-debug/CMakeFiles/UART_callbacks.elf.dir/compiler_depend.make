@@ -51,7 +51,13 @@ CMakeFiles/UART_callbacks.elf.dir/Core/Src/main.c.obj: /home/kovoya_mint/STMproj
   /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/lock.h \
   /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_locale.h \
   /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/strings.h \
-  /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/string.h
+  /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/string.h \
+  /home/kovoya_mint/STMproject/UART_callbacks/Core/Src/FIFO.c \
+  /home/kovoya_mint/STMproject/UART_callbacks/Core/Inc/FIFO.h \
+  /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/stdlib.h \
+  /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/stdlib.h \
+  /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/alloca.h \
+  /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h
 
 CMakeFiles/UART_callbacks.elf.dir/Core/Src/stm32f0xx_hal_msp.c.obj: /home/kovoya_mint/STMproject/UART_callbacks/Core/Src/stm32f0xx_hal_msp.c \
   /home/kovoya_mint/STMproject/UART_callbacks/Core/Inc/main.h \
@@ -894,6 +900,10 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_time.h:
 
+/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/signal.h:
+
+/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/stdio.h:
+
 /home/kovoya_mint/STMproject/UART_callbacks/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_pwr.h:
 
 /home/kovoya_mint/STMproject/UART_callbacks/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h:
@@ -928,9 +938,9 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/string.h:
 
-/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_endian.h:
-
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/stdlib.h:
+
+/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_endian.h:
 
 /home/kovoya_mint/STMproject/UART_callbacks/Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_exti.h:
 
@@ -986,6 +996,8 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_stdint.h:
 
+/home/kovoya_mint/STMproject/UART_callbacks/Core/Src/FIFO.c:
+
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/stdint.h:
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/features.h:
@@ -1004,6 +1016,8 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h:
 
+/home/kovoya_mint/STMproject/UART_callbacks/Core/Inc/FIFO.h:
+
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/config.h:
 
 /home/kovoya_mint/STMproject/UART_callbacks/Core/Src/main.c:
@@ -1021,6 +1035,8 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/errno.h:
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/stdlib.h:
+
+/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/alloca.h:
 
 /home/kovoya_mint/STMproject/UART_callbacks/Core/Src/stm32f0xx_it.c:
 
@@ -1046,9 +1062,9 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h:
 
-/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/types.h:
+/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/13.2.1/include/stdbool.h:
 
-/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/alloca.h:
+/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/types.h:
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/errno.h:
 
@@ -1061,7 +1077,3 @@ CMakeFiles/UART_callbacks.elf.dir/Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_types.h:
 
 /home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/13.2.1/include/stdarg.h:
-
-/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/stdio.h:
-
-/home/kovoya_mint/toolchain_arm/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/signal.h:
