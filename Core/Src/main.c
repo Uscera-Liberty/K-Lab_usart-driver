@@ -45,12 +45,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 
 /* USER CODE BEGIN PV */
 fifo_t myfifo;
-myfifo = fifo_create(10,sizeof(uint8_t));
-#define RX_BUFFER_SIZE 10
-static uint8_t rxBuffer[RX_BUFFER_SIZE];
-volatile uint8_t rxBufferIdx = 0;
 uint8_t temp_rxBuffer;
-
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -83,6 +78,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
+    myfifo = fifo_create(10,sizeof(uint8_t));
     HAL_NVIC_SetPriority(USART2_IRQn, 0, 0);
     HAL_NVIC_EnableIRQ(USART2_IRQn);
   /* USER CODE END Init */
@@ -250,9 +246,6 @@ void UART_ReceiveCallback(UART_HandleTypeDef *huart)
 {
     if (huart->Instance == USART2)
     {
-        if (rxBufferIdx > RX_BUFFER_SIZE){
-            rxBufferIdx = 0;
-        }
         temp_rxBuffer = huart->Instance->RDR;
         fifo_add(myfifo, (const void *) temp_rxBuffer);
         HAL_UART_Receive_IT(&huart2, (uint8_t *) temp_rxBuffer, 1);
